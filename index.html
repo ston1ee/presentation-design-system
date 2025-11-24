@@ -8,529 +8,109 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* ========================================
-           DEMOCRATIC CLARITY DESIGN SYSTEM
-           ======================================== */
-        
-        /* RESET & BASE */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* DEMOCRATIC CLARITY DESIGN SYSTEM */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            /* Primary Colors */
             --democratic-blue: #1E3A8A;
             --parliament-red: #DC2626;
-            
-            /* Secondary Colors */
             --slate-gray: #334155;
             --soft-white: #F8FAFC;
-            
-            /* Accent Colors */
             --data-teal: #0D9488;
             --economic-amber: #D97706;
             --neutral-beige: #78716C;
-            
-            /* Semantic Colors */
             --success-green: #10B981;
             --warning-yellow: #F59E0B;
             --error-red: #EF4444;
             --info-blue: #3B82F6;
-            
-            /* Spacing Scale */
-            --space-xs: 4px;
-            --space-sm: 8px;
-            --space-md: 16px;
-            --space-lg: 24px;
-            --space-xl: 32px;
-            --space-2xl: 48px;
-            --space-3xl: 64px;
-            
-            /* Typography */
+            --space-xs: 4px; --space-sm: 8px; --space-md: 16px; --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px;
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             --font-display: 'Playfair Display', Georgia, serif;
         }
         
-        body {
-            font-family: var(--font-primary);
-            font-size: 16px;
-            line-height: 1.6;
-            color: var(--slate-gray);
-            background: var(--soft-white);
-            overflow-x: hidden;
-        }
+        body { font-family: var(--font-primary); font-size: 16px; line-height: 1.6; color: var(--slate-gray); background: var(--soft-white); overflow-x: hidden; }
+        h1 { font-family: var(--font-display); font-size: 48px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--democratic-blue); margin-bottom: var(--space-lg); }
+        h2 { font-size: 36px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; color: var(--democratic-blue); margin-bottom: var(--space-md); }
+        h3 { font-size: 24px; font-weight: 600; line-height: 1.4; color: var(--slate-gray); margin-bottom: var(--space-md); }
+        h4 { font-size: 20px; font-weight: 600; line-height: 1.5; color: var(--slate-gray); margin-bottom: var(--space-sm); }
+        p { margin-bottom: var(--space-md); }
+        strong { font-weight: 600; color: var(--democratic-blue); }
         
-        /* TYPOGRAPHY SYSTEM */
-        h1 {
-            font-family: var(--font-display);
-            font-size: 48px;
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            color: var(--democratic-blue);
-            margin-bottom: var(--space-lg);
-        }
+        .presentation-container { width: 100%; min-height: 100vh; }
+        .slide { width: 100%; max-width: 1280px; margin: 0 auto; padding: var(--space-xl); min-height: 100vh; display: none; flex-direction: column; justify-content: center; animation: slideInFromRight 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .slide.active { display: flex; }
+        @keyframes slideInFromRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
         
-        h2 {
-            font-size: 36px;
-            font-weight: 600;
-            line-height: 1.3;
-            letter-spacing: -0.01em;
-            color: var(--democratic-blue);
-            margin-bottom: var(--space-md);
-        }
+        .slide-header { text-align: center; margin-bottom: var(--space-2xl); }
+        .slide-subtitle { font-size: 18px; color: var(--neutral-beige); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin-top: var(--space-sm); }
         
-        h3 {
-            font-size: 24px;
-            font-weight: 600;
-            line-height: 1.4;
-            color: var(--slate-gray);
-            margin-bottom: var(--space-md);
-        }
+        .data-card { background: #FFFFFF; border-radius: 12px; padding: var(--space-lg); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border-left: 4px solid var(--democratic-blue); transition: transform 0.2s ease, box-shadow 0.2s ease; margin-bottom: var(--space-lg); }
+        .data-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+        .data-card--success { border-left-color: var(--success-green); }
+        .data-card--warning { border-left-color: var(--economic-amber); }
+        .data-card--info { border-left-color: var(--info-blue); }
         
-        h4 {
-            font-size: 20px;
-            font-weight: 600;
-            line-height: 1.5;
-            color: var(--slate-gray);
-            margin-bottom: var(--space-sm);
-        }
+        .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; background: #FFFFFF; border-radius: 8px; overflow: hidden; margin: var(--space-lg) 0; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+        .comparison-table th { background: var(--democratic-blue); color: #FFFFFF; padding: var(--space-md); font-weight: 600; text-align: left; font-size: 16px; }
+        .comparison-table td { padding: var(--space-md); border-bottom: 1px solid #E2E8F0; }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table tr:nth-child(even) { background: var(--soft-white); }
         
-        p {
-            margin-bottom: var(--space-md);
-        }
+        .theory-tag { display: inline-block; padding: 6px 12px; border-radius: 16px; font-size: 14px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; margin: var(--space-xs); }
+        .theory-tag--michigan { background: #DBEAFE; color: var(--democratic-blue); }
+        .theory-tag--downs { background: #FEF3C7; color: #92400E; }
+        .theory-tag--cleavage { background: #D1FAE5; color: #065F46; }
+        .theory-tag--agenda { background: #FCE7F3; color: #9F1239; }
+        .theory-tag--inglehart { background: #E0E7FF; color: #3730A3; }
         
-        /* SLIDE CONTAINER */
-        .presentation-container {
-            width: 100%;
-            min-height: 100vh;
-        }
+        .quote-block { border-left: 4px solid var(--parliament-red); padding: var(--space-lg) var(--space-lg) var(--space-lg) var(--space-xl); background: linear-gradient(90deg, #FEE2E2 0%, var(--soft-white) 100%); font-style: italic; margin: var(--space-xl) 0; border-radius: 0 8px 8px 0; }
+        .quote-block cite { display: block; margin-top: var(--space-md); font-style: normal; font-weight: 600; color: var(--slate-gray); font-size: 14px; }
+        .quote-block cite::before { content: "— "; }
         
-        .slide {
-            width: 100%;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: var(--space-xl);
-            min-height: 100vh;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            animation: slideInFromRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .spectrum-container { position: relative; margin: var(--space-2xl) 0; padding: var(--space-xl) 0; }
+        .spectrum-line { height: 4px; background: linear-gradient(90deg, var(--parliament-red) 0%, var(--democratic-blue) 100%); border-radius: 2px; position: relative; margin: var(--space-lg) 0; }
+        .party-marker { position: absolute; top: -8px; transform: translateX(-50%); font-weight: 700; font-size: 16px; padding: 8px 12px; background: #FFFFFF; border: 2px solid var(--democratic-blue); border-radius: 20px; cursor: pointer; transition: all 0.2s ease; }
+        .party-marker:hover { transform: translateX(-50%) scale(1.1); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); z-index: 10; }
+        .median-indicator { position: absolute; top: 30px; transform: translateX(-50%); font-size: 14px; font-weight: 600; color: var(--parliament-red); white-space: nowrap; }
         
-        .slide.active {
-            display: flex;
-        }
+        .funnel-container { display: flex; flex-direction: column; gap: var(--space-md); margin: var(--space-xl) 0; }
+        .funnel-level { margin: 0 auto; padding: var(--space-lg); text-align: center; color: #FFFFFF; font-weight: 600; border-radius: 8px; position: relative; }
+        .funnel-level:nth-child(1) { width: 100%; background: linear-gradient(180deg, var(--democratic-blue) 0%, #2563EB 100%); }
+        .funnel-level:nth-child(2) { width: 85%; background: linear-gradient(180deg, #2563EB 0%, #3B82F6 100%); }
+        .funnel-level:nth-child(3) { width: 70%; background: linear-gradient(180deg, #3B82F6 0%, #60A5FA 100%); }
+        .funnel-level:nth-child(4) { width: 55%; background: linear-gradient(180deg, #60A5FA 0%, #93C5FD 100%); color: var(--slate-gray); }
         
-        @keyframes slideInFromRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+        .nav-arrow { position: fixed; bottom: 48px; width: 56px; height: 56px; border-radius: 50%; background: var(--democratic-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; z-index: 1000; font-size: 24px; box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3); }
+        .nav-arrow:hover { background: var(--parliament-red); transform: scale(1.1); }
+        .nav-arrow--prev { left: 32px; }
+        .nav-arrow--next { right: 32px; }
+        .slide-counter { position: fixed; bottom: 48px; left: 50%; transform: translateX(-50%); background: rgba(255, 255, 255, 0.95); padding: 12px 24px; border-radius: 24px; font-weight: 600; font-size: 14px; color: var(--slate-gray); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); z-index: 1000; }
+        .keyboard-hint { position: fixed; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.95); padding: 12px 20px; border-radius: 8px; font-size: 13px; color: var(--neutral-beige); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); z-index: 1000; }
+        .keyboard-hint kbd { background: var(--soft-white); border: 1px solid #CBD5E1; border-radius: 4px; padding: 2px 8px; font-family: monospace; font-size: 12px; margin: 0 4px; }
         
-        /* SLIDE HEADER */
-        .slide-header {
-            text-align: center;
-            margin-bottom: var(--space-2xl);
-        }
+        .stat-highlight { font-size: 48px; font-weight: 700; color: var(--parliament-red); line-height: 1; margin: var(--space-md) 0; }
+        .stat-label { font-size: 14px; font-weight: 600; color: var(--neutral-beige); text-transform: uppercase; letter-spacing: 0.05em; margin-top: var(--space-sm); }
+        .two-column-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); margin: var(--space-lg) 0; }
+        .three-column-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); margin: var(--space-lg) 0; }
+        .content-list { list-style: none; padding: 0; }
+        .content-list li { position: relative; padding-left: var(--space-lg); margin-bottom: var(--space-md); }
+        .content-list li::before { content: "→"; position: absolute; left: 0; color: var(--parliament-red); font-weight: 700; }
+        .arrow-indicator { display: inline-block; color: var(--parliament-red); font-weight: 700; margin: 0 var(--space-sm); }
         
-        .slide-subtitle {
-            font-size: 18px;
-            color: var(--neutral-beige);
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            margin-top: var(--space-sm);
-        }
-        
-        /* DATA CARDS */
-        .data-card {
-            background: #FFFFFF;
-            border-radius: 12px;
-            padding: var(--space-lg);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid var(--democratic-blue);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            margin-bottom: var(--space-lg);
-        }
-        
-        .data-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .data-card--success {
-            border-left-color: var(--success-green);
-        }
-        
-        .data-card--warning {
-            border-left-color: var(--economic-amber);
-        }
-        
-        .data-card--info {
-            border-left-color: var(--info-blue);
-        }
-        
-        /* COMPARISON TABLES */
-        .comparison-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background: #FFFFFF;
-            border-radius: 8px;
-            overflow: hidden;
-            margin: var(--space-lg) 0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .comparison-table th {
-            background: var(--democratic-blue);
-            color: #FFFFFF;
-            padding: var(--space-md);
-            font-weight: 600;
-            text-align: left;
-            font-size: 16px;
-        }
-        
-        .comparison-table td {
-            padding: var(--space-md);
-            border-bottom: 1px solid #E2E8F0;
-        }
-        
-        .comparison-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .comparison-table tr:nth-child(even) {
-            background: var(--soft-white);
-        }
-        
-        /* THEORY TAGS */
-        .theory-tag {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 16px;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-            margin: var(--space-xs);
-        }
-        
-        .theory-tag--michigan {
-            background: #DBEAFE;
-            color: var(--democratic-blue);
-        }
-        
-        .theory-tag--downs {
-            background: #FEF3C7;
-            color: #92400E;
-        }
-        
-        .theory-tag--cleavage {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-        
-        .theory-tag--agenda {
-            background: #FCE7F3;
-            color: #9F1239;
-        }
-        
-        .theory-tag--inglehart {
-            background: #E0E7FF;
-            color: #3730A3;
-        }
-        
-        /* QUOTE BLOCKS */
-        .quote-block {
-            border-left: 4px solid var(--parliament-red);
-            padding: var(--space-lg) var(--space-lg) var(--space-lg) var(--space-xl);
-            background: linear-gradient(90deg, #FEE2E2 0%, var(--soft-white) 100%);
-            font-style: italic;
-            margin: var(--space-xl) 0;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .quote-block cite {
-            display: block;
-            margin-top: var(--space-md);
-            font-style: normal;
-            font-weight: 600;
-            color: var(--slate-gray);
-            font-size: 14px;
-        }
-        
-        .quote-block cite::before {
-            content: "— ";
-        }
-        
-        /* POLITICAL SPECTRUM VISUALIZER */
-        .spectrum-container {
-            position: relative;
-            margin: var(--space-2xl) 0;
-            padding: var(--space-xl) 0;
-        }
-        
-        .spectrum-line {
-            height: 4px;
-            background: linear-gradient(90deg, var(--parliament-red) 0%, var(--democratic-blue) 100%);
-            border-radius: 2px;
-            position: relative;
-            margin: var(--space-lg) 0;
-        }
-        
-        .party-marker {
-            position: absolute;
-            top: -8px;
-            transform: translateX(-50%);
-            font-weight: 700;
-            font-size: 16px;
-            padding: 8px 12px;
-            background: #FFFFFF;
-            border: 2px solid var(--democratic-blue);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .party-marker:hover {
-            transform: translateX(-50%) scale(1.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-        }
-        
-        .median-indicator {
-            position: absolute;
-            top: 30px;
-            transform: translateX(-50%);
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--parliament-red);
-            white-space: nowrap;
-        }
-        
-        /* FUNNEL DIAGRAM (Michigan Model) */
-        .funnel-container {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
-            margin: var(--space-xl) 0;
-        }
-        
-        .funnel-level {
-            margin: 0 auto;
-            padding: var(--space-lg);
-            text-align: center;
-            color: #FFFFFF;
-            font-weight: 600;
-            border-radius: 8px;
-            position: relative;
-        }
-        
-        .funnel-level:nth-child(1) {
-            width: 100%;
-            background: linear-gradient(180deg, var(--democratic-blue) 0%, #2563EB 100%);
-        }
-        
-        .funnel-level:nth-child(2) {
-            width: 85%;
-            background: linear-gradient(180deg, #2563EB 0%, #3B82F6 100%);
-        }
-        
-        .funnel-level:nth-child(3) {
-            width: 70%;
-            background: linear-gradient(180deg, #3B82F6 0%, #60A5FA 100%);
-        }
-        
-        .funnel-level:nth-child(4) {
-            width: 55%;
-            background: linear-gradient(180deg, #60A5FA 0%, #93C5FD 100%);
-            color: var(--slate-gray);
-        }
-        
-        /* NAVIGATION */
-        .nav-arrow {
-            position: fixed;
-            bottom: 48px;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: var(--democratic-blue);
-            color: #FFFFFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            z-index: 1000;
-            font-size: 24px;
-            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
-        }
-        
-        .nav-arrow:hover {
-            background: var(--parliament-red);
-            transform: scale(1.1);
-        }
-        
-        .nav-arrow--prev {
-            left: 32px;
-        }
-        
-        .nav-arrow--next {
-            right: 32px;
-        }
-        
-        .slide-counter {
-            position: fixed;
-            bottom: 48px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
-            padding: 12px 24px;
-            border-radius: 24px;
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--slate-gray);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        
-        /* KEYBOARD INDICATOR */
-        .keyboard-hint {
-            position: fixed;
-            top: 24px;
-            right: 24px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 13px;
-            color: var(--neutral-beige);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        
-        .keyboard-hint kbd {
-            background: var(--soft-white);
-            border: 1px solid #CBD5E1;
-            border-radius: 4px;
-            padding: 2px 8px;
-            font-family: monospace;
-            font-size: 12px;
-            margin: 0 4px;
-        }
-        
-        /* STATISTICS HIGHLIGHT */
-        .stat-highlight {
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--parliament-red);
-            line-height: 1;
-            margin: var(--space-md) 0;
-        }
-        
-        .stat-label {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--neutral-beige);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-top: var(--space-sm);
-        }
-        
-        /* GRID LAYOUTS */
-        .two-column-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-xl);
-            margin: var(--space-lg) 0;
-        }
-        
-        .three-column-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-lg);
-            margin: var(--space-lg) 0;
-        }
-        
-        /* CONTENT LISTS */
-        .content-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .content-list li {
-            position: relative;
-            padding-left: var(--space-lg);
-            margin-bottom: var(--space-md);
-        }
-        
-        .content-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--parliament-red);
-            font-weight: 700;
-        }
-        
-        /* ARROW INDICATOR */
-        .arrow-indicator {
-            display: inline-block;
-            color: var(--parliament-red);
-            font-weight: 700;
-            margin: 0 var(--space-sm);
-        }
-        
-        /* EMPHASIS */
-        strong {
-            font-weight: 600;
-            color: var(--democratic-blue);
-        }
-        
-        /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
-            h1 { font-size: 36px; }
-            h2 { font-size: 28px; }
-            h3 { font-size: 20px; }
-            
-            .slide {
-                padding: var(--space-lg);
-            }
-            
-            .two-column-grid,
-            .three-column-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-arrow {
-                width: 48px;
-                height: 48px;
-                bottom: 24px;
-            }
-            
-            .nav-arrow--prev { left: 16px; }
-            .nav-arrow--next { right: 16px; }
-            
-            .keyboard-hint {
-                display: none;
-            }
-            
-            .stat-highlight {
-                font-size: 36px;
-            }
+            h1 { font-size: 36px; } h2 { font-size: 28px; } h3 { font-size: 20px; }
+            .slide { padding: var(--space-lg); }
+            .two-column-grid, .three-column-grid { grid-template-columns: 1fr; }
+            .nav-arrow { width: 48px; height: 48px; bottom: 24px; }
+            .nav-arrow--prev { left: 16px; } .nav-arrow--next { right: 16px; }
+            .keyboard-hint { display: none; }
+            .stat-highlight { font-size: 36px; }
         }
     </style>
 </head>
 <body>
     <div class="presentation-container">
-        <!-- SLIDE 1: Title Slide -->
+        <!-- SLIDE 1 -->
         <div class="slide active">
             <div class="slide-header">
                 <h1>Analyse af dansk demokrati og vælgeradfærd</h1>
@@ -538,7 +118,7 @@
             </div>
         </div>
 
-        <!-- SLIDE 2: Kommunalt Selvstyre -->
+        <!-- SLIDE 2 -->
         <div class="slide">
             <h2>Kommunalt selvstyre</h2>
             <div class="data-card">
@@ -546,462 +126,184 @@
                 <p>Opgaver løses på lavest mulige niveau</p>
                 <p><strong>98 kommuner i Danmark</strong> – fra 31 pladser (Næstved) til 55 pladser (København)</p>
             </div>
-            
             <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Almindelig Kommune</th>
-                        <th>København</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Almindelig Kommune</th><th>København</th></tr></thead>
                 <tbody>
-                    <tr>
-                        <td>1 borgmester</td>
-                        <td>7 borgmestre + 1 overborgmester</td>
-                    </tr>
-                    <tr>
-                        <td>Centraliseret ledelse</td>
-                        <td>Ressortfordeling (som ministre)</td>
-                    </tr>
-                    <tr>
-                        <td>Hurtigere beslutninger</td>
-                        <td>Bredere politisk repræsentation</td>
-                    </tr>
+                    <tr><td>1 borgmester</td><td>7 borgmestre + 1 overborgmester</td></tr>
+                    <tr><td>Centraliseret ledelse</td><td>Ressortfordeling (som ministre)</td></tr>
+                    <tr><td>Hurtigere beslutninger</td><td>Bredere politisk repræsentation</td></tr>
                 </tbody>
             </table>
-            
-            <div class="data-card data-card--info">
-                <p><strong>Eneste kommune i Danmark med magistratsstyre</strong></p>
-            </div>
+            <div class="data-card data-card--info"><p><strong>Eneste kommune i Danmark med magistratsstyre</strong></p></div>
         </div>
 
-        <!-- SLIDE 3: Case - København & Næstved -->
+        <!-- SLIDE 3 -->
         <div class="slide">
             <h2>Case: København & Næstved</h2>
-            
             <div class="two-column-grid">
-                <div class="data-card data-card--success">
-                    <h4>København</h4>
-                    <p class="stat-highlight">SF vandt</p>
-                    <p>Line Barfod overtog borgmesterposten</p>
-                </div>
-                
-                <div class="data-card data-card--warning">
-                    <h4>Næstved</h4>
-                    <p class="stat-highlight">V vandt</p>
-                    <p>V overtog borgmesterpost fra S</p>
-                </div>
-            </div>
-            
-            <div class="data-card">
-                <h3>Hvad forklarer denne forskel?</h3>
-                <ul class="content-list">
-                    <li>Forskellige vælgergrupper</li>
-                    <li>Lokale issues vs. nationale tendenser</li>
-                    <li>Mediedækning og kampagnestrategier</li>
-                    <li>By-land konflikten</li>
-                </ul>
+                <div class="data-card data-card--success"><h4>København</h4><p>SF vandt - Line Barfod overtog</p></div>
+                <div class="data-card data-card--warning"><h4>Næstved</h4><p>V overtog borgmesterpost fra S</p></div>
             </div>
         </div>
 
-        <!-- SLIDE 4: Agenda-Setting Teori -->
+        <!-- SLIDE 4 -->
         <div class="slide">
             <h2>Mediernes rolle: Agenda-Setting</h2>
-            
             <div class="data-card">
                 <span class="theory-tag theory-tag--agenda">McCombs & Shaw</span>
                 <h3>Medierne sætter dagsorden for HVAD vi tænker om</h3>
                 <p><strong>Hybrid media environment:</strong> Traditionelle + sociale medier forstærker hinanden</p>
             </div>
-            
             <div class="two-column-grid">
-                <div class="data-card">
-                    <h4>København</h4>
-                    <ul class="content-list">
-                        <li>DR, TV2, aviser</li>
-                        <li>National dækning</li>
-                        <li>Større synlighed</li>
-                    </ul>
-                </div>
-                
-                <div class="data-card">
-                    <h4>Næstved</h4>
-                    <ul class="content-list">
-                        <li>Sjællandske Medier</li>
-                        <li>Lokalradio</li>
-                        <li>Næstved-fokus</li>
-                    </ul>
-                </div>
+                <div class="data-card"><h4>København</h4><p>DR, TV2, aviser – København får national dækning</p></div>
+                <div class="data-card"><h4>Næstved</h4><p>Sjællandske Medier, lokalradio – Næstved-fokus</p></div>
             </div>
-            
-            <div class="data-card data-card--info">
-                <p class="stat-highlight">97%</p>
-                <p class="stat-label">af kandidater brugte Facebook i valgkampen</p>
-            </div>
+            <div class="data-card data-card--info"><p class="stat-highlight">97%</p><p class="stat-label">af kandidater brugte Facebook i valgkampen</p></div>
         </div>
 
-        <!-- SLIDE 5: Sociale Medier Impact -->
+        <!-- SLIDE 5 -->
         <div class="slide">
             <h2>Sociale mediers betydning</h2>
-            
             <div class="data-card data-card--warning">
-                <h3>Meta lukkede for politiske annoncer oktober 2025</h3>
-                <p class="arrow-indicator">→</p>
-                <p>Organisk indhold blev afgørende</p>
+                <h3>Meta lukkede for politiske annoncer oktober 2025 → Organisk indhold blev afgørende</h3>
             </div>
-            
             <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Line Barfod (SF)</th>
-                        <th>Sophie Hæstorp (S)</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Line Barfod (SF)</th><th>Sophie Hæstorp (S)</th></tr></thead>
                 <tbody>
-                    <tr>
-                        <td>Reels, TikTok, Instagram</td>
-                        <td>Fokus på traditionelle medier</td>
-                    </tr>
-                    <tr>
-                        <td>Personlige videoer med borgere</td>
-                        <td>TV-interviews, pressemeddelelser</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Vandt unge vælgere</strong></td>
-                        <td>Tabte momentum</td>
-                    </tr>
-                    <tr>
-                        <td>Viral på sociale medier</td>
-                        <td>Mindre synlig online</td>
-                    </tr>
+                    <tr><td>Reels, TikTok, Instagram</td><td>Fokus på traditionelle medier</td></tr>
+                    <tr><td>Personlige videoer med borgere</td><td>TV-interviews, pressemeddelelser</td></tr>
+                    <tr><td><strong>Vandt unge vælgere</strong></td><td>Tabte momentum</td></tr>
+                    <tr><td>Viral på sociale medier</td><td>Mindre synlig online</td></tr>
                 </tbody>
             </table>
-            
-            <div class="quote-block">
-                Det flytter stemmer når man taler sproget på TikTok
-                <cite>Benjamin Rud Elberth, kommunikationsekspert</cite>
-            </div>
+            <div class="quote-block">Det flytter stemmer når man taler sproget på TikTok<cite>Benjamin Rud Elberth, kommunikationsekspert</cite></div>
         </div>
 
-        <!-- SLIDE 6: Personalisering -->
+        <!-- SLIDE 6 -->
         <div class="slide">
             <h2>Personalisering af politik</h2>
-            
-            <div class="quote-block">
-                Der er nogle der ikke er klar over at der er valg. Derfor bruger jeg massivt sociale medier
-                <cite>Kandidat til Danske Kommuner</cite>
-            </div>
-            
-            <div class="data-card data-card--success">
-                <h3>En viral TikTok kan ændre valg på få dage</h3>
-                <p><strong>Eksempel:</strong> Kandidat brugte familie i opslag <span class="arrow-indicator">→</span> "stikker helt af"</p>
-            </div>
-            
-            <div class="data-card">
-                <h3>Vælgere følger PERSONER, ikke partier</h3>
-                <p>Accelererer dealignment – Line Barfod > SF's program</p>
-            </div>
-            
-            <div class="data-card data-card--info">
-                <p class="stat-highlight">155%</p>
-                <p class="stat-label">flere sidevisninger hos private medier omkring kommunalvalget</p>
-            </div>
+            <div class="quote-block">Der er nogle der ikke er klar over at der er valg. Derfor bruger jeg massivt sociale medier<cite>Kandidat til Danske Kommuner</cite></div>
+            <div class="data-card data-card--success"><h3>En viral TikTok kan ændre valg på få dage</h3><p><strong>Eksempel:</strong> Kandidat brugte familie i opslag → "stikker helt af"</p></div>
+            <div class="data-card"><h3>Vælgere følger PERSONER, ikke partier</h3><p>Accelererer dealignment – Line Barfod > SF's program</p></div>
+            <div class="data-card data-card--info"><p class="stat-highlight">155%</p><p class="stat-label">flere sidevisninger hos private medier omkring kommunalvalget</p></div>
         </div>
 
-        <!-- SLIDE 7: Rational Choice -->
+        <!-- SLIDE 7 -->
         <div class="slide">
             <h2>Rational Choice: Downs' teori</h2>
-            
-            <div class="data-card">
-                <span class="theory-tag theory-tag--downs">Downs</span>
-                <h3>Vælgere maksimerer nytte → Partier søger medianvælgeren</h3>
-            </div>
-            
+            <div class="data-card"><span class="theory-tag theory-tag--downs">Downs</span><h3>Vælgere maksimerer nytte → Partier søger medianvælgeren</h3></div>
             <div class="spectrum-container">
-                <div style="text-align: center; margin-bottom: var(--space-lg);">
-                    <strong>◄ VENSTRE</strong> [Ø—EL—SF—S—RV—M—V—K—DD—LA—NB] <strong>HØJRE ►</strong>
-                </div>
+                <div style="text-align: center; margin-bottom: var(--space-lg);"><strong>◄ VENSTRE</strong> [Ø—EL—SF—S—RV—M—V—K—DD—LA—NB] <strong>HØJRE ►</strong></div>
                 <div class="spectrum-line">
-                    <div class="party-marker" style="left: 15%">Ø</div>
-                    <div class="party-marker" style="left: 25%">SF</div>
-                    <div class="party-marker" style="left: 40%">S</div>
-                    <div class="party-marker" style="left: 60%">V</div>
-                    <div class="party-marker" style="left: 75%">K</div>
-                    <div class="party-marker" style="left: 85%">LA</div>
-                    <div class="median-indicator" style="left: 50%">⬆ Medianvælgeren</div>
+                    <div class="party-marker" style="left: 15%">Ø</div><div class="party-marker" style="left: 25%">SF</div><div class="party-marker" style="left: 40%">S</div>
+                    <div class="party-marker" style="left: 60%">V</div><div class="party-marker" style="left: 75%">K</div><div class="party-marker" style="left: 85%">LA</div>
+                    <div class="median-indicator" style="left: 50%">↑ Medianvælgeren</div>
                 </div>
             </div>
-            
             <div class="two-column-grid">
-                <div class="data-card data-card--success">
-                    <h4>København</h4>
-                    <p>Medianvælger flyttet til venstre <span class="arrow-indicator">→</span> <strong>SF vandt</strong></p>
-                </div>
-                
-                <div class="data-card data-card--warning">
-                    <h4>Næstved</h4>
-                    <p>Medianvælger i midten <span class="arrow-indicator">→</span> <strong>V vandt</strong></p>
-                </div>
+                <div class="data-card data-card--success"><h4>København</h4><p>Medianvælger flyttet til venstre → <strong>SF vandt</strong></p></div>
+                <div class="data-card data-card--warning"><h4>Næstved</h4><p>Medianvælger i midten → <strong>V vandt</strong></p></div>
             </div>
         </div>
 
-        <!-- SLIDE 8: Cleavage Theory -->
+        <!-- SLIDE 8 -->
         <div class="slide">
             <h2>Cleavage-teori: By-land konflikten</h2>
-            
-            <div class="data-card">
-                <span class="theory-tag theory-tag--cleavage">Lipset & Rokkan</span>
-                <h3>By-land konflikten strukturerer dansk politik</h3>
-            </div>
-            
+            <div class="data-card"><span class="theory-tag theory-tag--cleavage">Lipset & Rokkan</span><h3>By-land konflikten strukturerer dansk politik</h3></div>
             <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>København (Centrum)</th>
-                        <th>Næstved (Periferi)</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>København (Centrum)</th><th>Næstved (Periferi)</th></tr></thead>
                 <tbody>
-                    <tr>
-                        <td>Højtuddannede, unge, kosmopolitiske</td>
-                        <td>Bredere alder, faglærte, lokale</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Postmaterielle værdier (Inglehart):</strong> Klima, identitet, kultur</td>
-                        <td><strong>Materielle værdier:</strong> Jobs, økonomi, velfærd</td>
-                    </tr>
-                    <tr>
-                        <td>Bilfri by = godt</td>
-                        <td>Bil = nødvendighed</td>
-                    </tr>
-                    <tr>
-                        <td>SF/Ø/Alternativet vinder</td>
-                        <td>V/K står stærkere</td>
-                    </tr>
+                    <tr><td>Højtuddannede, unge, kosmopolitiske</td><td>Bredere alder, faglærte, lokale</td></tr>
+                    <tr><td><strong>Postmaterielle værdier (Inglehart):</strong> Klima, identitet, kultur</td><td><strong>Materielle værdier:</strong> Jobs, økonomi, velfærd</td></tr>
+                    <tr><td>Bilfri by = godt</td><td>Bil = nødvendighed</td></tr>
+                    <tr><td>SF/Ø/Alternativet vinder</td><td>V/K står stærkere</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- SLIDE 9: Michigan Model -->
+        <!-- SLIDE 9 -->
         <div class="slide">
             <h2>Michigan-modellen: Vælgeradfærd</h2>
-            
-            <div class="data-card">
-                <span class="theory-tag theory-tag--michigan">Michigan-modellen</span>
-                <h3>Funnel of Causality</h3>
-            </div>
-            
+            <div class="data-card"><span class="theory-tag theory-tag--michigan">Michigan-modellen</span><h3>Funnel of Causality</h3></div>
             <div class="funnel-container">
-                <div class="funnel-level">
-                    <strong>⬇️ LANGSIGTSFAKTORER</strong><br>
-                    Socialisering, klasse, værdier
-                </div>
-                <div class="funnel-level">
-                    <strong>⬇️ PARTIIDENTIFIKATION</strong><br>
-                    "Jeg ER socialdemokrat"
-                </div>
-                <div class="funnel-level">
-                    <strong>⬇️ KORTSIGTSFAKTORER</strong><br>
-                    Kandidater, issues, økonomi
-                </div>
-                <div class="funnel-level">
-                    <strong>⬇️ STEMMEAFGIVNING</strong>
-                </div>
+                <div class="funnel-level"><strong>⬇️ LANGSIGTSFAKTORER</strong><br>Socialisering, klasse, værdier</div>
+                <div class="funnel-level"><strong>⬇️ PARTIIDENTIFIKATION</strong><br>"Jeg ER socialdemokrat"</div>
+                <div class="funnel-level"><strong>⬇️ KORTSIGTSFAKTORER</strong><br>Kandidater, issues, økonomi</div>
+                <div class="funnel-level"><strong>⬇️ STEMMEAFGIVNING</strong></div>
             </div>
-            
-            <div class="data-card data-card--info">
-                <p>Landspolitisk valgvind påvirker kommunalvalg</p>
-            </div>
+            <div class="data-card data-card--info"><p>Landspolitisk valgvind påvirker kommunalvalg</p></div>
         </div>
 
-        <!-- SLIDE 10: Dealignment -->
+        <!-- SLIDE 10 -->
         <div class="slide">
             <h2>Dealignment: Partiidentifikation svækkes</h2>
-            
-            <div class="quote-block">
-                Partierne er ikke længere bevægelser med rod i befolkningen - de er redskaber for personlige ambitioner
-                <cite>Søren Pind</cite>
-            </div>
-            
-            <div class="data-card data-card--warning">
-                <p class="stat-highlight">49%</p>
-                <p class="stat-label">af vælgerne var uafklarede få uger før valget</p>
-            </div>
-            
-            <div class="data-card">
-                <h3>Konsekvenser</h3>
-                <ul class="content-list">
-                    <li>Større volatilitet mellem valg</li>
-                    <li>Personalisering bliver vigtigere</li>
-                    <li>Kortsigtsfaktorer dominerer</li>
-                    <li>Sociale medier får større betydning</li>
-                </ul>
-            </div>
+            <div class="quote-block">Partierne er ikke længere bevægelser med rod i befolkningen - de er redskaber for personlige ambitioner<cite>Søren Pind</cite></div>
+            <div class="data-card data-card--warning"><p class="stat-highlight">49%</p><p class="stat-label">af vælgerne var uafklarede få uger før valget</p></div>
         </div>
 
-        <!-- SLIDE 11: Folketingsvalg 2026 -->
+        <!-- SLIDE 11 -->
         <div class="slide">
             <h2>Fremadrettet: Folketingsvalg 2026</h2>
-            
-            <div class="data-card data-card--info">
-                <h3>Senest 31. oktober 2026</h3>
-            </div>
-            
+            <div class="data-card data-card--info"><h3>Senest 31. oktober 2026</h3></div>
             <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Parti</th>
-                        <th>Procent (seneste måling)</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Parti</th><th>Procent</th></tr></thead>
                 <tbody>
-                    <tr>
-                        <td>Socialdemokratiet</td>
-                        <td><strong>20,6%</strong></td>
-                    </tr>
-                    <tr>
-                        <td>SF</td>
-                        <td><strong>12,6%</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Liberal Alliance</td>
-                        <td><strong>11,3%</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Venstre</td>
-                        <td><strong>10,4%</strong></td>
-                    </tr>
+                    <tr><td>Socialdemokratiet</td><td><strong>20,6%</strong></td></tr>
+                    <tr><td>SF</td><td><strong>12,6%</strong></td></tr>
+                    <tr><td>Liberal Alliance</td><td><strong>11,3%</strong></td></tr>
+                    <tr><td>Venstre</td><td><strong>10,4%</strong></td></tr>
                 </tbody>
             </table>
-            
-            <div class="data-card data-card--success">
-                <p><strong>Partiledere bliver afgørende for stemmer</strong></p>
-            </div>
+            <div class="data-card data-card--success"><p><strong>Partiledere bliver afgørende for stemmer</strong></p></div>
         </div>
 
-        <!-- SLIDE 12: KV vs FV Comparison -->
+        <!-- SLIDE 12 -->
         <div class="slide">
             <h2>Kommunalvalg vs. Folketingsvalg</h2>
-            
             <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Aspekt</th>
-                        <th>Kommunalvalg</th>
-                        <th>Folketingsvalg</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Aspekt</th><th>Kommunalvalg</th><th>Folketingsvalg</th></tr></thead>
                 <tbody>
-                    <tr>
-                        <td><strong>Fokus</strong></td>
-                        <td>Lokale emner</td>
-                        <td>Nationale emner</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Kandidater</strong></td>
-                        <td>Personlige</td>
-                        <td>Partileder</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Afgørende</strong></td>
-                        <td>Borgmestereffekt</td>
-                        <td>Statsministereffekt</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Betydning</strong></td>
-                        <td>Kortsigtsfaktorer dominerer</td>
-                        <td>Mix af kort- og langsigtsfaktorer</td>
-                    </tr>
+                    <tr><td><strong>Fokus</strong></td><td>Lokale emner</td><td>Nationale emner</td></tr>
+                    <tr><td><strong>Kandidater</strong></td><td>Personlige</td><td>Partileder</td></tr>
+                    <tr><td><strong>Afgørende</strong></td><td>Borgmestereffekt</td><td>Statsministereffekt</td></tr>
                 </tbody>
             </table>
-            
-            <div class="data-card">
-                <p>Kortsigtsfaktorer dominerer - langsigtsfaktorer (S-højborg) betyder mindre og mindre</p>
-            </div>
+            <div class="data-card"><p>Kortsigtsfaktorer dominerer - langsigtsfaktorer (S-højborg) betyder mindre og mindre</p></div>
         </div>
 
-        <!-- SLIDE 13: Theory Summary -->
+        <!-- SLIDE 13 -->
         <div class="slide">
             <h2>Teoretisk sammenfatning</h2>
-            
             <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Teori</th>
-                        <th>Forklaring</th>
-                        <th>2025-evidens</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Teori</th><th>Forklaring</th><th>2025-evidens</th></tr></thead>
                 <tbody>
-                    <tr>
-                        <td><span class="theory-tag theory-tag--michigan">Michigan</span></td>
-                        <td>Langsigte + kortsigte faktorer → stemme</td>
-                        <td>Dealignment: 49% uafklarede</td>
-                    </tr>
-                    <tr>
-                        <td><span class="theory-tag theory-tag--downs">Downs</span></td>
-                        <td>Partier søger medianvælger</td>
-                        <td>SF vandt KBH, V vandt Næstved</td>
-                    </tr>
-                    <tr>
-                        <td><span class="theory-tag theory-tag--cleavage">Cleavage</span></td>
-                        <td>By-land konflikt</td>
-                        <td>Postmaterielle vs. materielle værdier</td>
-                    </tr>
-                    <tr>
-                        <td><span class="theory-tag theory-tag--agenda">Agenda-Setting</span></td>
-                        <td>Medier sætter dagsorden for emner</td>
-                        <td>Line Barfods TikTok → klima-fokus</td>
-                    </tr>
-                    <tr>
-                        <td><span class="theory-tag theory-tag--inglehart">Inglehart</span></td>
-                        <td>Fra materielle → postmaterielle</td>
-                        <td>Forklarer København vs. Næstved</td>
-                    </tr>
+                    <tr><td><span class="theory-tag theory-tag--michigan">Michigan</span></td><td>Langsigte + kortsigte faktorer → stemme</td><td>Dealignment: 49% uafklarede</td></tr>
+                    <tr><td><span class="theory-tag theory-tag--downs">Downs</span></td><td>Partier søger medianvælger</td><td>SF vandt KBH, V vandt Næstved</td></tr>
+                    <tr><td><span class="theory-tag theory-tag--cleavage">Cleavage</span></td><td>By-land konflikt</td><td>Postmaterielle vs. materielle værdier</td></tr>
+                    <tr><td><span class="theory-tag theory-tag--agenda">Agenda-Setting</span></td><td>Medier sætter dagsorden for emner</td><td>Line Barfods TikTok → klima-fokus</td></tr>
+                    <tr><td><span class="theory-tag theory-tag--inglehart">Inglehart</span></td><td>Fra materielle → postmaterielle</td><td>Forklarer København vs. Næstved</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- SLIDE 14: Conclusion -->
+        <!-- SLIDE 14 -->
         <div class="slide">
-            <div class="slide-header">
-                <h2>Konklusion</h2>
-            </div>
-            
-            <div class="data-card data-card--success">
-                <h3>Kommunalvalg 2025 viser:</h3>
-                <ul class="content-list">
-                    <li>By-land konflikten er mere relevant end nogensinde</li>
-                    <li>Sociale medier har fundamentalt ændret kampagner</li>
-                    <li>Personalisering overgår partiidentifikation</li>
-                    <li>Medianvælgeren varierer lokalt</li>
-                    <li>Kortsigtsfaktorer dominerer beslutninger</li>
-                </ul>
-            </div>
-            
+            <div class="slide-header"><h2>Konklusion</h2></div>
             <div class="data-card data-card--info">
                 <h3>Husk at stemme ved folketingsvalget</h3>
                 <p class="stat-highlight">31. okt. 2026</p>
                 <p class="stat-label">senest</p>
             </div>
-            
-            <div style="text-align: center; margin-top: var(--space-2xl);">
-                <p class="slide-subtitle">Samfundsfag A | November 2025</p>
-            </div>
+            <div style="text-align: center; margin-top: var(--space-2xl);"><p class="slide-subtitle">Samfundsfag A | November 2025</p></div>
         </div>
     </div>
 
-    <!-- Navigation Controls -->
     <div class="nav-arrow nav-arrow--prev" id="prevBtn">‹</div>
     <div class="nav-arrow nav-arrow--next" id="nextBtn">›</div>
     <div class="slide-counter" id="slideCounter">1 / 14</div>
     <div class="keyboard-hint">Brug <kbd>←</kbd> <kbd>→</kbd> eller klik for at navigere</div>
 
     <script>
-        // ========================================
-        // NAVIGATION SYSTEM
-        // ========================================
-        
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
@@ -1010,146 +312,42 @@
         const nextBtn = document.getElementById('nextBtn');
         
         function showSlide(n) {
-            // Wrap around
-            if (n >= totalSlides) {
-                currentSlide = 0;
-            } else if (n < 0) {
-                currentSlide = totalSlides - 1;
-            } else {
-                currentSlide = n;
-            }
-            
-            // Hide all slides
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-            });
-            
-            // Show current slide
+            if (n >= totalSlides) currentSlide = 0;
+            else if (n < 0) currentSlide = totalSlides - 1;
+            else currentSlide = n;
+            slides.forEach(slide => slide.classList.remove('active'));
             slides[currentSlide].classList.add('active');
-            
-            // Update counter
             slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
-            
-            // Update navigation button visibility
             prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
             nextBtn.style.opacity = currentSlide === totalSlides - 1 ? '0.5' : '1';
         }
         
-        function nextSlide() {
-            showSlide(currentSlide + 1);
-        }
+        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
         
-        function prevSlide() {
-            showSlide(currentSlide - 1);
-        }
-        
-        // Navigation button event listeners
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-        
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                e.preventDefault();
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                prevSlide();
-            } else if (e.key === 'Home') {
-                e.preventDefault();
-                showSlide(0);
-            } else if (e.key === 'End') {
-                e.preventDefault();
-                showSlide(totalSlides - 1);
-            }
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); showSlide(currentSlide + 1); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); showSlide(currentSlide - 1); }
+            else if (e.key === 'Home') { e.preventDefault(); showSlide(0); }
+            else if (e.key === 'End') { e.preventDefault(); showSlide(totalSlides - 1); }
         });
         
-        // Click on right side to advance, left side to go back
         document.addEventListener('click', (e) => {
-            const clickX = e.clientX;
-            const screenWidth = window.innerWidth;
-            
-            // Ignore clicks on navigation buttons
             if (e.target.closest('.nav-arrow')) return;
-            
-            if (clickX > screenWidth * 0.6) {
-                nextSlide();
-            } else if (clickX < screenWidth * 0.4) {
-                prevSlide();
-            }
+            const clickX = e.clientX, screenWidth = window.innerWidth;
+            if (clickX > screenWidth * 0.6) showSlide(currentSlide + 1);
+            else if (clickX < screenWidth * 0.4) showSlide(currentSlide - 1);
         });
         
-        // Touch support for mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        document.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
+        let touchStartX = 0, touchEndX = 0;
+        document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
         document.addEventListener('touchend', (e) => {
             touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
+            if (touchEndX < touchStartX - 50) showSlide(currentSlide + 1);
+            if (touchEndX > touchStartX + 50) showSlide(currentSlide - 1);
         });
         
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) {
-                nextSlide();
-            }
-            if (touchEndX > touchStartX + 50) {
-                prevSlide();
-            }
-        }
-        
-        // Initialize
         showSlide(0);
-        
-        // ========================================
-        // ANIMATED STATISTICS
-        // ========================================
-        
-        function animateValue(element, start, end, duration, suffix = '') {
-            const range = end - start;
-            const increment = range / (duration / 16);
-            let current = start;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
-                    current = end;
-                    clearInterval(timer);
-                }
-                element.textContent = Math.floor(current) + suffix;
-            }, 16);
-        }
-        
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const statHighlights = entry.target.querySelectorAll('.stat-highlight');
-                    statHighlights.forEach(stat => {
-                        const text = stat.textContent;
-                        const number = parseInt(text.replace(/[^0-9]/g, ''));
-                        const suffix = text.replace(/[0-9]/g, '');
-                        
-                        if (!isNaN(number)) {
-                            animateValue(stat, 0, number, 1000, suffix);
-                        }
-                    });
-                }
-            });
-        }, observerOptions);
-        
-        // Observe all slides for animation triggers
-        slides.forEach(slide => {
-            observer.observe(slide);
-        });
     </script>
 </body>
 </html>
