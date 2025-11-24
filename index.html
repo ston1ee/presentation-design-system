@@ -3,351 +3,728 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analyse af dansk demokrati og vælgeradfærd | Kommunalvalg 2025</title>
+    <title>Kommunalvalg 2025 & Folketingsvalg 2026 - Komplet Analyse</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         /* DEMOCRATIC CLARITY DESIGN SYSTEM */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         :root {
-            --democratic-blue: #1E3A8A;
-            --parliament-red: #DC2626;
-            --slate-gray: #334155;
-            --soft-white: #F8FAFC;
-            --data-teal: #0D9488;
-            --economic-amber: #D97706;
-            --neutral-beige: #78716C;
-            --success-green: #10B981;
-            --warning-yellow: #F59E0B;
-            --error-red: #EF4444;
-            --info-blue: #3B82F6;
-            --space-xs: 4px; --space-sm: 8px; --space-md: 16px; --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px;
-            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --font-display: 'Playfair Display', Georgia, serif;
+            --democratic-blue: #1E3A8A; --parliament-red: #DC2626; --slate-gray: #334155; --soft-white: #F8FAFC; --pure-white: #FFFFFF;
+            --data-teal: #0D9488; --econ-amber: #D97706; --neutral-beige: #78716C;
+            --tag-michigan: #DBEAFE; --tag-michigan-text: #1E3A8A;
+            --tag-downs: #FEF3C7; --tag-downs-text: #92400E;
+            --tag-cleavage: #D1FAE5; --tag-cleavage-text: #065F46;
+            --tag-media: #FCE7F3; --tag-media-text: #9F1239;
         }
-        
-        body { font-family: var(--font-primary); font-size: 16px; line-height: 1.6; color: var(--slate-gray); background: var(--soft-white); overflow-x: hidden; }
-        h1 { font-family: var(--font-display); font-size: 48px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--democratic-blue); margin-bottom: var(--space-lg); }
-        h2 { font-size: 36px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; color: var(--democratic-blue); margin-bottom: var(--space-md); }
-        h3 { font-size: 24px; font-weight: 600; line-height: 1.4; color: var(--slate-gray); margin-bottom: var(--space-md); }
-        h4 { font-size: 20px; font-weight: 600; line-height: 1.5; color: var(--slate-gray); margin-bottom: var(--space-sm); }
-        p { margin-bottom: var(--space-md); }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--soft-white); color: var(--slate-gray); line-height: 1.6; overflow: hidden; height: 100vh; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 1rem; line-height: 1.1; color: var(--democratic-blue); }
+        h2 { font-size: 2rem; margin-bottom: 1rem; font-weight: 700; border-bottom: 4px solid var(--parliament-red); display: inline-block; padding-bottom: 0.5rem; color: var(--democratic-blue); }
+        h3 { font-size: 1.4rem; margin-bottom: 0.75rem; font-weight: 600; color: var(--slate-gray); }
+        h4 { font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 600; }
+        p { font-size: 1rem; margin-bottom: 0.75rem; }
         strong { font-weight: 600; color: var(--democratic-blue); }
         
-        .presentation-container { width: 100%; min-height: 100vh; }
-        .slide { width: 100%; max-width: 1280px; margin: 0 auto; padding: var(--space-xl); min-height: 100vh; display: none; flex-direction: column; justify-content: center; animation: slideInFromRight 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .slide.active { display: flex; }
-        @keyframes slideInFromRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 2.5rem 4rem; display: none; flex-direction: column; justify-content: flex-start; overflow-y: auto; background: var(--soft-white); }
+        .slide.active { display: flex; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .slide-header { text-align: center; margin-bottom: var(--space-2xl); }
-        .slide-subtitle { font-size: 18px; color: var(--neutral-beige); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin-top: var(--space-sm); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
         
-        .data-card { background: #FFFFFF; border-radius: 12px; padding: var(--space-lg); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border-left: 4px solid var(--democratic-blue); transition: transform 0.2s ease, box-shadow 0.2s ease; margin-bottom: var(--space-lg); }
-        .data-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
-        .data-card--success { border-left-color: var(--success-green); }
-        .data-card--warning { border-left-color: var(--economic-amber); }
-        .data-card--info { border-left-color: var(--info-blue); }
+        .data-card { background: white; border-radius: 10px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 5px solid var(--democratic-blue); margin-bottom: 1rem; }
+        .data-card.warning { border-left-color: var(--econ-amber); }
+        .data-card.alert { border-left-color: var(--parliament-red); }
+        .data-card.success { border-left-color: var(--data-teal); }
         
-        .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; background: #FFFFFF; border-radius: 8px; overflow: hidden; margin: var(--space-lg) 0; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
-        .comparison-table th { background: var(--democratic-blue); color: #FFFFFF; padding: var(--space-md); font-weight: 600; text-align: left; font-size: 16px; }
-        .comparison-table td { padding: var(--space-md); border-bottom: 1px solid #E2E8F0; }
-        .comparison-table tr:last-child td { border-bottom: none; }
-        .comparison-table tr:nth-child(even) { background: var(--soft-white); }
+        .stat-large { font-size: 3rem; font-weight: 800; color: var(--parliament-red); line-height: 1; display: block; margin-bottom: 0.5rem; }
+        .stat-medium { font-size: 2rem; font-weight: 700; color: var(--democratic-blue); }
         
-        .theory-tag { display: inline-block; padding: 6px 12px; border-radius: 16px; font-size: 14px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; margin: var(--space-xs); }
-        .theory-tag--michigan { background: #DBEAFE; color: var(--democratic-blue); }
-        .theory-tag--downs { background: #FEF3C7; color: #92400E; }
-        .theory-tag--cleavage { background: #D1FAE5; color: #065F46; }
-        .theory-tag--agenda { background: #FCE7F3; color: #9F1239; }
-        .theory-tag--inglehart { background: #E0E7FF; color: #3730A3; }
+        .theory-tag { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.75rem; }
+        .tag-michigan { background: var(--tag-michigan); color: var(--tag-michigan-text); }
+        .tag-downs { background: var(--tag-downs); color: var(--tag-downs-text); }
+        .tag-cleavage { background: var(--tag-cleavage); color: var(--tag-cleavage-text); }
+        .tag-media { background: var(--tag-media); color: var(--tag-media-text); }
         
-        .quote-block { border-left: 4px solid var(--parliament-red); padding: var(--space-lg) var(--space-lg) var(--space-lg) var(--space-xl); background: linear-gradient(90deg, #FEE2E2 0%, var(--soft-white) 100%); font-style: italic; margin: var(--space-xl) 0; border-radius: 0 8px 8px 0; }
-        .quote-block cite { display: block; margin-top: var(--space-md); font-style: normal; font-weight: 600; color: var(--slate-gray); font-size: 14px; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+        th { background: var(--democratic-blue); color: white; padding: 0.9rem; text-align: left; font-weight: 600; }
+        td { padding: 0.9rem; border-bottom: 1px solid #e5e7eb; }
+        tr:nth-child(even) { background: var(--soft-white); }
+        
+        .quote-block { border-left: 4px solid var(--parliament-red); padding: 1.2rem 1.5rem; background: #FEF2F2; font-style: italic; font-size: 1.05rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+        .quote-block cite { display: block; margin-top: 0.5rem; font-style: normal; font-weight: 600; font-size: 0.85rem; }
         .quote-block cite::before { content: "— "; }
         
-        .spectrum-container { position: relative; margin: var(--space-2xl) 0; padding: var(--space-xl) 0; }
-        .spectrum-line { height: 4px; background: linear-gradient(90deg, var(--parliament-red) 0%, var(--democratic-blue) 100%); border-radius: 2px; position: relative; margin: var(--space-lg) 0; }
-        .party-marker { position: absolute; top: -8px; transform: translateX(-50%); font-weight: 700; font-size: 16px; padding: 8px 12px; background: #FFFFFF; border: 2px solid var(--democratic-blue); border-radius: 20px; cursor: pointer; transition: all 0.2s ease; }
-        .party-marker:hover { transform: translateX(-50%) scale(1.1); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); z-index: 10; }
-        .median-indicator { position: absolute; top: 30px; transform: translateX(-50%); font-size: 14px; font-weight: 600; color: var(--parliament-red); white-space: nowrap; }
+        .funnel { display: flex; flex-direction: column; align-items: center; gap: 3px; margin: 1.5rem 0; }
+        .flayer { padding: 1rem; text-align: center; color: white; font-weight: bold; font-size: 0.95rem; }
+        .f1 { background: #1E3A8A; width: 100%; clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%); }
+        .f2 { background: #2563EB; width: 85%; clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%); }
+        .f3 { background: #3B82F6; width: 70%; clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%); }
+        .f4 { background: #DC2626; width: 55%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); border-radius: 0 0 8px 8px; }
         
-        .funnel-container { display: flex; flex-direction: column; gap: var(--space-md); margin: var(--space-xl) 0; }
-        .funnel-level { margin: 0 auto; padding: var(--space-lg); text-align: center; color: #FFFFFF; font-weight: 600; border-radius: 8px; position: relative; }
-        .funnel-level:nth-child(1) { width: 100%; background: linear-gradient(180deg, var(--democratic-blue) 0%, #2563EB 100%); }
-        .funnel-level:nth-child(2) { width: 85%; background: linear-gradient(180deg, #2563EB 0%, #3B82F6 100%); }
-        .funnel-level:nth-child(3) { width: 70%; background: linear-gradient(180deg, #3B82F6 0%, #60A5FA 100%); }
-        .funnel-level:nth-child(4) { width: 55%; background: linear-gradient(180deg, #60A5FA 0%, #93C5FD 100%); color: var(--slate-gray); }
-        
-        .nav-arrow { position: fixed; bottom: 48px; width: 56px; height: 56px; border-radius: 50%; background: var(--democratic-blue); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; z-index: 1000; font-size: 24px; box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3); }
-        .nav-arrow:hover { background: var(--parliament-red); transform: scale(1.1); }
-        .nav-arrow--prev { left: 32px; }
-        .nav-arrow--next { right: 32px; }
-        .slide-counter { position: fixed; bottom: 48px; left: 50%; transform: translateX(-50%); background: rgba(255, 255, 255, 0.95); padding: 12px 24px; border-radius: 24px; font-weight: 600; font-size: 14px; color: var(--slate-gray); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); z-index: 1000; }
-        .keyboard-hint { position: fixed; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.95); padding: 12px 20px; border-radius: 8px; font-size: 13px; color: var(--neutral-beige); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); z-index: 1000; }
-        .keyboard-hint kbd { background: var(--soft-white); border: 1px solid #CBD5E1; border-radius: 4px; padding: 2px 8px; font-family: monospace; font-size: 12px; margin: 0 4px; }
-        
-        .stat-highlight { font-size: 48px; font-weight: 700; color: var(--parliament-red); line-height: 1; margin: var(--space-md) 0; }
-        .stat-label { font-size: 14px; font-weight: 600; color: var(--neutral-beige); text-transform: uppercase; letter-spacing: 0.05em; margin-top: var(--space-sm); }
-        .two-column-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); margin: var(--space-lg) 0; }
-        .three-column-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); margin: var(--space-lg) 0; }
-        .content-list { list-style: none; padding: 0; }
-        .content-list li { position: relative; padding-left: var(--space-lg); margin-bottom: var(--space-md); }
-        .content-list li::before { content: "→"; position: absolute; left: 0; color: var(--parliament-red); font-weight: 700; }
-        .arrow-indicator { display: inline-block; color: var(--parliament-red); font-weight: 700; margin: 0 var(--space-sm); }
-        
-        @media (max-width: 768px) {
-            h1 { font-size: 36px; } h2 { font-size: 28px; } h3 { font-size: 20px; }
-            .slide { padding: var(--space-lg); }
-            .two-column-grid, .three-column-grid { grid-template-columns: 1fr; }
-            .nav-arrow { width: 48px; height: 48px; bottom: 24px; }
-            .nav-arrow--prev { left: 16px; } .nav-arrow--next { right: 16px; }
-            .keyboard-hint { display: none; }
-            .stat-highlight { font-size: 36px; }
-        }
+        .nav-controls { position: fixed; bottom: 1.5rem; right: 1.5rem; display: flex; gap: 0.75rem; z-index: 200; }
+        .nav-btn { background: var(--democratic-blue); color: white; border: none; width: 2.5rem; height: 2.5rem; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: 0.2s; }
+        .nav-btn:hover { background: var(--parliament-red); transform: scale(1.1); }
+        .slide-counter { position: fixed; bottom: 1.5rem; left: 1.5rem; font-weight: 600; color: var(--slate-gray); z-index: 200; background: white; padding: 0.5rem 1rem; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
-    <div class="presentation-container">
-        <!-- SLIDE 1 -->
-        <div class="slide active">
-            <div class="slide-header">
-                <h1>Analyse af dansk demokrati og vælgeradfærd</h1>
-                <p class="slide-subtitle">Samfundsfag A | November 2025</p>
+
+<div class="slide-counter">Slide <span id="current">1</span> / 25</div>
+<div class="nav-controls">
+    <button class="nav-btn" onclick="prev()">←</button>
+    <button class="nav-btn" onclick="next()">→</button>
+</div>
+
+<div class="slide-container" id="container">
+
+    <!-- SLIDE 1 -->
+    <div class="slide active">
+        <span class="theory-tag tag-michigan">Samfundsfag A | November 2025</span>
+        <h1>Analyse af dansk demokrati og vælgeradfærd</h1>
+        <h3>Kommunalvalg 18. november 2025 & Folketingsvalg (senest 31. oktober 2026)</h3>
+        <p style="margin-top: 2rem;">3 personer | 20-22 minutter | 6 centrale teorier</p>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide">
+        <h2>Dagsorden</h2>
+        <div class="grid-2">
+            <div>
+                <h4>DEL 1: Struktur</h4>
+                <ul>
+                    <li>Kommunalt selvstyre (§82)</li>
+                    <li>Magistratsstyre vs. Udvalgsstyre</li>
+                </ul>
+                <h4>DEL 2: Valganalyse</h4>
+                <ul>
+                    <li>Vindere & Tabere KV25</li>
+                    <li>København & Næstved</li>
+                </ul>
+                <h4>DEL 3: Teorier</h4>
+                <ul>
+                    <li>Michigan-modellen (Dealignment)</li>
+                    <li>Downs (Medianvælgeren)</li>
+                    <li>Cleavage-teori (By-land)</li>
+                </ul>
             </div>
-        </div>
-
-        <!-- SLIDE 2 -->
-        <div class="slide">
-            <h2>Kommunalt selvstyre</h2>
-            <div class="data-card">
-                <h3>Beslutninger træffes tæt på borgerne</h3>
-                <p>Opgaver løses på lavest mulige niveau</p>
-                <p><strong>98 kommuner i Danmark</strong> – fra 31 pladser (Næstved) til 55 pladser (København)</p>
+            <div>
+                <ul>
+                    <li>Inglehart (Værdiforskydning)</li>
+                    <li>Agenda-setting (Medier)</li>
+                    <li>Second-Order Elections</li>
+                </ul>
+                <h4>DEL 4: Perspektivering</h4>
+                <ul>
+                    <li>Folketingsvalg 2026</li>
+                    <li>Konklusion</li>
+                </ul>
             </div>
-            <table class="comparison-table">
-                <thead><tr><th>Almindelig Kommune</th><th>København</th></tr></thead>
-                <tbody>
-                    <tr><td>1 borgmester</td><td>7 borgmestre + 1 overborgmester</td></tr>
-                    <tr><td>Centraliseret ledelse</td><td>Ressortfordeling (som ministre)</td></tr>
-                    <tr><td>Hurtigere beslutninger</td><td>Bredere politisk repræsentation</td></tr>
-                </tbody>
-            </table>
-            <div class="data-card data-card--info"><p><strong>Eneste kommune i Danmark med magistratsstyre</strong></p></div>
-        </div>
-
-        <!-- SLIDE 3 -->
-        <div class="slide">
-            <h2>Case: København & Næstved</h2>
-            <div class="two-column-grid">
-                <div class="data-card data-card--success"><h4>København</h4><p>SF vandt - Line Barfod overtog</p></div>
-                <div class="data-card data-card--warning"><h4>Næstved</h4><p>V overtog borgmesterpost fra S</p></div>
-            </div>
-        </div>
-
-        <!-- SLIDE 4 -->
-        <div class="slide">
-            <h2>Mediernes rolle: Agenda-Setting</h2>
-            <div class="data-card">
-                <span class="theory-tag theory-tag--agenda">McCombs & Shaw</span>
-                <h3>Medierne sætter dagsorden for HVAD vi tænker om</h3>
-                <p><strong>Hybrid media environment:</strong> Traditionelle + sociale medier forstærker hinanden</p>
-            </div>
-            <div class="two-column-grid">
-                <div class="data-card"><h4>København</h4><p>DR, TV2, aviser – København får national dækning</p></div>
-                <div class="data-card"><h4>Næstved</h4><p>Sjællandske Medier, lokalradio – Næstved-fokus</p></div>
-            </div>
-            <div class="data-card data-card--info"><p class="stat-highlight">97%</p><p class="stat-label">af kandidater brugte Facebook i valgkampen</p></div>
-        </div>
-
-        <!-- SLIDE 5 -->
-        <div class="slide">
-            <h2>Sociale mediers betydning</h2>
-            <div class="data-card data-card--warning">
-                <h3>Meta lukkede for politiske annoncer oktober 2025 → Organisk indhold blev afgørende</h3>
-            </div>
-            <table class="comparison-table">
-                <thead><tr><th>Line Barfod (SF)</th><th>Sophie Hæstorp (S)</th></tr></thead>
-                <tbody>
-                    <tr><td>Reels, TikTok, Instagram</td><td>Fokus på traditionelle medier</td></tr>
-                    <tr><td>Personlige videoer med borgere</td><td>TV-interviews, pressemeddelelser</td></tr>
-                    <tr><td><strong>Vandt unge vælgere</strong></td><td>Tabte momentum</td></tr>
-                    <tr><td>Viral på sociale medier</td><td>Mindre synlig online</td></tr>
-                </tbody>
-            </table>
-            <div class="quote-block">Det flytter stemmer når man taler sproget på TikTok<cite>Benjamin Rud Elberth, kommunikationsekspert</cite></div>
-        </div>
-
-        <!-- SLIDE 6 -->
-        <div class="slide">
-            <h2>Personalisering af politik</h2>
-            <div class="quote-block">Der er nogle der ikke er klar over at der er valg. Derfor bruger jeg massivt sociale medier<cite>Kandidat til Danske Kommuner</cite></div>
-            <div class="data-card data-card--success"><h3>En viral TikTok kan ændre valg på få dage</h3><p><strong>Eksempel:</strong> Kandidat brugte familie i opslag → "stikker helt af"</p></div>
-            <div class="data-card"><h3>Vælgere følger PERSONER, ikke partier</h3><p>Accelererer dealignment – Line Barfod > SF's program</p></div>
-            <div class="data-card data-card--info"><p class="stat-highlight">155%</p><p class="stat-label">flere sidevisninger hos private medier omkring kommunalvalget</p></div>
-        </div>
-
-        <!-- SLIDE 7 -->
-        <div class="slide">
-            <h2>Rational Choice: Downs' teori</h2>
-            <div class="data-card"><span class="theory-tag theory-tag--downs">Downs</span><h3>Vælgere maksimerer nytte → Partier søger medianvælgeren</h3></div>
-            <div class="spectrum-container">
-                <div style="text-align: center; margin-bottom: var(--space-lg);"><strong>◄ VENSTRE</strong> [Ø—EL—SF—S—RV—M—V—K—DD—LA—NB] <strong>HØJRE ►</strong></div>
-                <div class="spectrum-line">
-                    <div class="party-marker" style="left: 15%">Ø</div><div class="party-marker" style="left: 25%">SF</div><div class="party-marker" style="left: 40%">S</div>
-                    <div class="party-marker" style="left: 60%">V</div><div class="party-marker" style="left: 75%">K</div><div class="party-marker" style="left: 85%">LA</div>
-                    <div class="median-indicator" style="left: 50%">↑ Medianvælgeren</div>
-                </div>
-            </div>
-            <div class="two-column-grid">
-                <div class="data-card data-card--success"><h4>København</h4><p>Medianvælger flyttet til venstre → <strong>SF vandt</strong></p></div>
-                <div class="data-card data-card--warning"><h4>Næstved</h4><p>Medianvælger i midten → <strong>V vandt</strong></p></div>
-            </div>
-        </div>
-
-        <!-- SLIDE 8 -->
-        <div class="slide">
-            <h2>Cleavage-teori: By-land konflikten</h2>
-            <div class="data-card"><span class="theory-tag theory-tag--cleavage">Lipset & Rokkan</span><h3>By-land konflikten strukturerer dansk politik</h3></div>
-            <table class="comparison-table">
-                <thead><tr><th>København (Centrum)</th><th>Næstved (Periferi)</th></tr></thead>
-                <tbody>
-                    <tr><td>Højtuddannede, unge, kosmopolitiske</td><td>Bredere alder, faglærte, lokale</td></tr>
-                    <tr><td><strong>Postmaterielle værdier (Inglehart):</strong> Klima, identitet, kultur</td><td><strong>Materielle værdier:</strong> Jobs, økonomi, velfærd</td></tr>
-                    <tr><td>Bilfri by = godt</td><td>Bil = nødvendighed</td></tr>
-                    <tr><td>SF/Ø/Alternativet vinder</td><td>V/K står stærkere</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- SLIDE 9 -->
-        <div class="slide">
-            <h2>Michigan-modellen: Vælgeradfærd</h2>
-            <div class="data-card"><span class="theory-tag theory-tag--michigan">Michigan-modellen</span><h3>Funnel of Causality</h3></div>
-            <div class="funnel-container">
-                <div class="funnel-level"><strong>⬇️ LANGSIGTSFAKTORER</strong><br>Socialisering, klasse, værdier</div>
-                <div class="funnel-level"><strong>⬇️ PARTIIDENTIFIKATION</strong><br>"Jeg ER socialdemokrat"</div>
-                <div class="funnel-level"><strong>⬇️ KORTSIGTSFAKTORER</strong><br>Kandidater, issues, økonomi</div>
-                <div class="funnel-level"><strong>⬇️ STEMMEAFGIVNING</strong></div>
-            </div>
-            <div class="data-card data-card--info"><p>Landspolitisk valgvind påvirker kommunalvalg</p></div>
-        </div>
-
-        <!-- SLIDE 10 -->
-        <div class="slide">
-            <h2>Dealignment: Partiidentifikation svækkes</h2>
-            <div class="quote-block">Partierne er ikke længere bevægelser med rod i befolkningen - de er redskaber for personlige ambitioner<cite>Søren Pind</cite></div>
-            <div class="data-card data-card--warning"><p class="stat-highlight">49%</p><p class="stat-label">af vælgerne var uafklarede få uger før valget</p></div>
-        </div>
-
-        <!-- SLIDE 11 -->
-        <div class="slide">
-            <h2>Fremadrettet: Folketingsvalg 2026</h2>
-            <div class="data-card data-card--info"><h3>Senest 31. oktober 2026</h3></div>
-            <table class="comparison-table">
-                <thead><tr><th>Parti</th><th>Procent</th></tr></thead>
-                <tbody>
-                    <tr><td>Socialdemokratiet</td><td><strong>20,6%</strong></td></tr>
-                    <tr><td>SF</td><td><strong>12,6%</strong></td></tr>
-                    <tr><td>Liberal Alliance</td><td><strong>11,3%</strong></td></tr>
-                    <tr><td>Venstre</td><td><strong>10,4%</strong></td></tr>
-                </tbody>
-            </table>
-            <div class="data-card data-card--success"><p><strong>Partiledere bliver afgørende for stemmer</strong></p></div>
-        </div>
-
-        <!-- SLIDE 12 -->
-        <div class="slide">
-            <h2>Kommunalvalg vs. Folketingsvalg</h2>
-            <table class="comparison-table">
-                <thead><tr><th>Aspekt</th><th>Kommunalvalg</th><th>Folketingsvalg</th></tr></thead>
-                <tbody>
-                    <tr><td><strong>Fokus</strong></td><td>Lokale emner</td><td>Nationale emner</td></tr>
-                    <tr><td><strong>Kandidater</strong></td><td>Personlige</td><td>Partileder</td></tr>
-                    <tr><td><strong>Afgørende</strong></td><td>Borgmestereffekt</td><td>Statsministereffekt</td></tr>
-                </tbody>
-            </table>
-            <div class="data-card"><p>Kortsigtsfaktorer dominerer - langsigtsfaktorer (S-højborg) betyder mindre og mindre</p></div>
-        </div>
-
-        <!-- SLIDE 13 -->
-        <div class="slide">
-            <h2>Teoretisk sammenfatning</h2>
-            <table class="comparison-table">
-                <thead><tr><th>Teori</th><th>Forklaring</th><th>2025-evidens</th></tr></thead>
-                <tbody>
-                    <tr><td><span class="theory-tag theory-tag--michigan">Michigan</span></td><td>Langsigte + kortsigte faktorer → stemme</td><td>Dealignment: 49% uafklarede</td></tr>
-                    <tr><td><span class="theory-tag theory-tag--downs">Downs</span></td><td>Partier søger medianvælger</td><td>SF vandt KBH, V vandt Næstved</td></tr>
-                    <tr><td><span class="theory-tag theory-tag--cleavage">Cleavage</span></td><td>By-land konflikt</td><td>Postmaterielle vs. materielle værdier</td></tr>
-                    <tr><td><span class="theory-tag theory-tag--agenda">Agenda-Setting</span></td><td>Medier sætter dagsorden for emner</td><td>Line Barfods TikTok → klima-fokus</td></tr>
-                    <tr><td><span class="theory-tag theory-tag--inglehart">Inglehart</span></td><td>Fra materielle → postmaterielle</td><td>Forklarer København vs. Næstved</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- SLIDE 14 -->
-        <div class="slide">
-            <div class="slide-header"><h2>Konklusion</h2></div>
-            <div class="data-card data-card--info">
-                <h3>Husk at stemme ved folketingsvalget</h3>
-                <p class="stat-highlight">31. okt. 2026</p>
-                <p class="stat-label">senest</p>
-            </div>
-            <div style="text-align: center; margin-top: var(--space-2xl);"><p class="slide-subtitle">Samfundsfag A | November 2025</p></div>
         </div>
     </div>
 
-    <div class="nav-arrow nav-arrow--prev" id="prevBtn">‹</div>
-    <div class="nav-arrow nav-arrow--next" id="nextBtn">›</div>
-    <div class="slide-counter" id="slideCounter">1 / 14</div>
-    <div class="keyboard-hint">Brug <kbd>←</kbd> <kbd>→</kbd> eller klik for at navigere</div>
+    <!-- SLIDE 3 -->
+    <div class="slide">
+        <h2>Kommunalt Selvstyre (§82)</h2>
+        <div class="data-card">
+            <h3>Grundlovssikring</h3>
+            <p>Det kommunale selvstyre er <strong>grundlovssikret i §82</strong>. Staten kan ikke bare afskaffe kommunerne eller overtage deres opgaver.</p>
+        </div>
+        <div class="grid-2">
+            <div class="data-card success">
+                <h4>1. Nærhedsprincippet</h4>
+                <p>Beslutninger træffes så tæt på borgerne som muligt</p>
+                <p>Lokale politikere kender de lokale behov bedre end Christiansborg</p>
+            </div>
+            <div class="data-card success">
+                <h4>2. Subsidiaritet</h4>
+                <p>Opgaver løses på lavest mulige niveau</p>
+                <p>Kun hvis kommunen ikke kan løse opgaven, går den til staten</p>
+            </div>
+        </div>
+        <p><strong>98 kommuner</strong> efter Strukturreformen 2007 (fra 271 kommuner + 13 amter)</p>
+    </div>
 
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        const slideCounter = document.getElementById('slideCounter');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        
-        function showSlide(n) {
-            if (n >= totalSlides) currentSlide = 0;
-            else if (n < 0) currentSlide = totalSlides - 1;
-            else currentSlide = n;
-            slides.forEach(slide => slide.classList.remove('active'));
-            slides[currentSlide].classList.add('active');
-            slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
-            prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
-            nextBtn.style.opacity = currentSlide === totalSlides - 1 ? '0.5' : '1';
-        }
-        
-        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
-        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); showSlide(currentSlide + 1); }
-            else if (e.key === 'ArrowLeft') { e.preventDefault(); showSlide(currentSlide - 1); }
-            else if (e.key === 'Home') { e.preventDefault(); showSlide(0); }
-            else if (e.key === 'End') { e.preventDefault(); showSlide(totalSlides - 1); }
-        });
-        
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.nav-arrow')) return;
-            const clickX = e.clientX, screenWidth = window.innerWidth;
-            if (clickX > screenWidth * 0.6) showSlide(currentSlide + 1);
-            else if (clickX < screenWidth * 0.4) showSlide(currentSlide - 1);
-        });
-        
-        let touchStartX = 0, touchEndX = 0;
-        document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
-        document.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            if (touchEndX < touchStartX - 50) showSlide(currentSlide + 1);
-            if (touchEndX > touchStartX + 50) showSlide(currentSlide - 1);
-        });
-        
-        showSlide(0);
-    </script>
+    <!-- SLIDE 4 -->
+    <div class="slide">
+        <h2>Magistratsstyre vs. Udvalgsstyre</h2>
+        <table>
+            <thead>
+                <tr><th>Aspekt</th><th>Udvalgsstyre (Næstved)</th><th>Magistratsstyre (København)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Borgmestre</strong></td><td>1 borgmester</td><td>1 overborgmester + 6 fagborgmestre</td></tr>
+                <tr><td><strong>Magt</strong></td><td>Centraliseret</td><td>Fordelt efter partiernes styrke (d'Hondts metode)</td></tr>
+                <tr><td><strong>Beslutninger</strong></td><td>Hurtigere</td><td>Bredere repræsentation, men langsommere</td></tr>
+                <tr><td><strong>Struktur</strong></td><td>Ligner et firma</td><td>Ligner en regering</td></tr>
+            </tbody>
+        </table>
+        <div class="data-card alert">
+            <p><strong>København 2025:</strong> SF fik flest stemmer → Line Barfod blev overborgmester</p>
+            <p>Men S, RV og Ø har også borgmesterposter fordi magistraten fordeles proportionalt</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide">
+        <h2>KV25: Et Jordskred</h2>
+        <div class="grid-3">
+            <div class="data-card alert">
+                <span class="stat-large">-5,2%</span>
+                <p><strong>Socialdemokratiet</strong></p>
+                <p>Faldt til 23,2%</p>
+            </div>
+            <div class="data-card success">
+                <span class="stat-large">+3,4%</span>
+                <p><strong>SF</strong></p>
+                <p>Steg til 11,1%</p>
+            </div>
+            <div class="data-card success">
+                <span class="stat-large">+4,1%</span>
+                <p><strong>Liberal Alliance</strong></p>
+                <p>Fra 1,38% til 5,5% (firdoblet!)</p>
+            </div>
+        </div>
+        <div class="grid-2">
+            <div class="data-card warning">
+                <p><strong>Venstre:</strong> -3,3% til 17,9%</p>
+            </div>
+            <div class="data-card">
+                <p><strong>Danmarksdemokraterne:</strong> Debut med 4,7%</p>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 1.5rem;"><strong>Stemmeprocent: 69,2%</strong> (op fra 67,2% i 2021)</p>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide">
+        <h2>Vindere & Tabere</h2>
+        <div class="grid-2">
+            <div>
+                <h3 style="color: var(--data-teal);">VINDERE</h3>
+                <div class="data-card success">
+                    <h4>SF (+3,4%)</h4>
+                    <p>Vandt København - Line Barfod overborgmester</p>
+                    <p>Første gang siden 1903 uden S</p>
+                </div>
+                <div class="data-card success">
+                    <h4>Liberal Alliance (+4,1%)</h4>
+                    <p>Eksplosiv vækst blandt unge</p>
+                    <p>Firdoblet på ét valg</p>
+                </div>
+                <div class="data-card success">
+                    <h4>Danmarksdemokraterne (4,7%)</h4>
+                    <p>Imponerende debut</p>
+                </div>
+            </div>
+            <div>
+                <h3 style="color: var(--parliament-red);">TABERE</h3>
+                <div class="data-card alert">
+                    <h4>Socialdemokratiet (-5,2%)</h4>
+                    <p>Mistede Kbh, Næstved, Køge, Gladsaxe, Fredericia</p>
+                    <p>Historisk katastrofe</p>
+                </div>
+                <div class="data-card alert">
+                    <h4>Venstre (-3,3%)</h4>
+                    <p>Faldt til 17,9%</p>
+                    <p>De to gamle store partier i krise</p>
+                </div>
+            </div>
+        </div>
+        <p style="text-align: center;"><strong>KONKLUSION:</strong> Polarisering - Midten taber til fløjene</p>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide">
+        <h2>København: Valgkampstemaer</h2>
+        <div class="data-card success">
+            <h3>Line Barfods budskab: "Det nære grønne"</h3>
+        </div>
+        <div class="grid-2">
+            <div class="data-card">
+                <h4>🌳 Klima & Bæredygtighed</h4>
+                <ul>
+                    <li>Flere parker og træer</li>
+                    <li>Grøn byudvikling</li>
+                    <li>Bilfri bydele</li>
+                </ul>
+            </div>
+            <div class="data-card">
+                <h4>🏠 Boligpolitik</h4>
+                <ul>
+                    <li>Høje lejepriser</li>
+                    <li>Flere billige boliger</li>
+                    <li>Kollektiv trafik</li>
+                </ul>
+            </div>
+        </div>
+        <div class="grid-2">
+            <div class="data-card">
+                <h4>🚴 Trafik</h4>
+                <ul><li>Flere cykelstier</li><li>Mindre bilisme</li></ul>
+            </div>
+            <div class="data-card">
+                <h4>🌆 Byrum</h4>
+                <ul><li>Grønne oaser</li><li>Liv i gaderne</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div class="slide">
+        <h2>Næstved: Valgkampstemaer</h2>
+        <div class="data-card warning">
+            <h3>Venstres budskab: "Gør kagen større uden at hæve skatten"</h3>
+        </div>
+        <div class="grid-2">
+            <div class="data-card">
+                <h4>🏘️ Bosætning & Tilflytning</h4>
+                <ul>
+                    <li>Hvordan får vi folk til at flytte til Næstved?</li>
+                    <li>Attraktiv by at bo i</li>
+                </ul>
+            </div>
+            <div class="data-card">
+                <h4>💼 Erhvervsudvikling</h4>
+                <ul>
+                    <li>Jobskabelse</li>
+                    <li>Virksomhedsvækst</li>
+                </ul>
+            </div>
+        </div>
+        <div class="grid-2">
+            <div class="data-card">
+                <h4>🏥 Velfærd</h4>
+                <ul><li>Ældrepleje</li><li>Sundhedstilbud</li></ul>
+            </div>
+            <div class="data-card">
+                <h4>💧 Grundvand</h4>
+                <ul><li>Beskyttelse af drikkevand</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 9 -->
+    <div class="slide">
+        <span class="theory-tag tag-downs">Anthony Downs - Rational Choice</span>
+        <h2>Medianvælgerteori</h2>
+        <div class="data-card">
+            <h3>Grundantagelser</h3>
+            <p>✓ Vælgere er <strong>rationelle aktører</strong> der maksimerer deres nytte</p>
+            <p>✓ Partier vil <strong>maksimere stemmer</strong> (som firmaer vil maksimere profit)</p>
+            <p>✓ Derfor søger partier mod <strong>medianvælgeren</strong> (midten af vælgerskaren)</p>
+        </div>
+        <div style="text-align: center; margin: 2rem 0;">
+            <p style="font-size: 1.1rem; font-weight: 600;">◄ VENSTRE ————————— [MEDIANVÆLGER] ————————— HØJRE ►</p>
+            <p>Ø—EL—SF—S—RV—M—V—K—DD—LA—NB</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 10 -->
+    <div class="slide">
+        <span class="theory-tag tag-cleavage">Lipset & Rokkan + Inglehart</span>
+        <h2>Cleavage-teori: By-land konflikten</h2>
+        <table>
+            <thead><tr><th></th><th>København (Centrum)</th><th>Næstved (Periferi)</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Uddannelse</strong></td><td>Høj (mange akademikere)</td><td>Bredere (mange faglærte)</td></tr>
+                <tr><td><strong>Alder</strong></td><td>Unge (studerende, unge familier)</td><td>Højere gennemsnitsalder</td></tr>
+                <tr><td><strong>Kultur</strong></td><td>Multikulturel, kosmopolitisk</td><td>Etnisk homogen, lokalorienteret</td></tr>
+                <tr><td><strong>Bolig</strong></td><td>Lejer (høje priser)</td><td>Ejer (lavere priser)</td></tr>
+                <tr><td><strong>Værdier</strong></td><td><strong>Postmaterielle:</strong> Klima, identitet, kultur</td><td><strong>Materielle:</strong> Job, økonomi, velfærd</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- SLIDE 11 -->
+    <div class="slide">
+        <span class="theory-tag tag-media">McCombs & Shaw</span>
+        <h2>Mediernes rolle: Agenda-Setting</h2>
+        <div class="quote-block">
+            Medierne fortæller os ikke HVAD vi skal tænke, men de sætter dagsorden for HVAD vi skal tænke om
+            <cite>Maxwell McCombs & Donald Shaw</cite>
+        </div>
+        <div class="data-card">
+            <h3>Hybrid Media Environment</h3>
+            <p>Traditionelle medier (DR, TV2, aviser) + Sociale medier (TikTok, Instagram) <strong>forstærker hinanden</strong></p>
+        </div>
+        <div class="grid-2">
+            <div class="data-card">
+                <h4>København</h4>
+                <p>DR, TV2, aviser → National dækning</p>
+            </div>
+            <div class="data-card">
+                <h4>Næstved</h4>
+                <p>Sjællandske Medier, lokalradio → Lokal dækning</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 12 -->
+    <div class="slide">
+        <h2>Sociale Medier: Statistik fra KV25</h2>
+        <div class="grid-2">
+            <div class="data-card">
+                <span class="stat-large">97%</span>
+                <p>af kandidater brugte <strong>Facebook</strong></p>
+            </div>
+            <div class="data-card">
+                <span class="stat-large">55%</span>
+                <p>af kandidater brugte <strong>Instagram</strong></p>
+            </div>
+        </div>
+        <div class="grid-2">
+            <div class="data-card">
+                <span class="stat-large">29%</span>
+                <p>brugte <strong>LinkedIn</strong></p>
+            </div>
+            <div class="data-card">
+                <span class="stat-large">7%</span>
+                <p>brugte <strong>TikTok</strong></p>
+            </div>
+        </div>
+        <div class="data-card alert" style="margin-top: 1.5rem;">
+            <h3>GAME-CHANGER: Meta lukkede for politiske annoncer oktober 2025</h3>
+            <p>→ Organisk indhold (reels, stories) blev afgørende</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 13 -->
+    <div class="slide">
+        <h2>Line Barfod vs. Sophie Hæstorp</h2>
+        <table>
+            <thead><tr><th>Strategi</th><th>Line Barfod (SF) - Vandt</th><th>Sophie Hæstorp (S) - Tabte</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Platforme</strong></td><td>Reels, TikTok, Instagram</td><td>Fokus på traditionelle medier (TV2, DR)</td></tr>
+                <tr><td><strong>Indhold</strong></td><td>Personlige videoer med borgere</td><td>TV-interviews, pressemeddelelser</td></tr>
+                <tr><td><strong>Tone</strong></td><td>Autentisk, personlig, relaterbar</td><td>Formel, politisk</td></tr>
+                <tr><td><strong>Resultat</strong></td><td><strong>Vandt unge vælgere</strong></td><td>Tabte momentum - unge ser ikke fjernsyn</td></tr>
+            </tbody>
+        </table>
+        <div class="quote-block">
+            Det flytter stemmer når man taler sproget på TikTok
+            <cite>Benjamin Rud Elberth, kommunikationsekspert</cite>
+        </div>
+    </div>
+
+    <!-- SLIDE 14 -->
+    <div class="slide">
+        <h2>Næstved: Lokale Medier</h2>
+        <div class="data-card">
+            <h3>Facebook-grupper for lokale emner</h3>
+            <p>Kandidater deltog i lokale debatter, svarede på spørgsmål i borgergrupper</p>
+        </div>
+        <div class="data-card">
+            <h3>LinkedIn til erhvervsnetværk</h3>
+            <p>Nå ud til lokale virksomheder og jobskabere</p>
+        </div>
+        <div class="quote-block">
+            Folk ved ikke der er valg - derfor bruger jeg massivt sociale medier
+            <cite>Kandidat til Danske Kommuner</cite>
+        </div>
+    </div>
+
+    <!-- SLIDE 15 -->
+    <div class="slide">
+        <h2>Medier som Kortsigtsfaktor</h2>
+        <div class="data-card alert">
+            <h3>En viral TikTok kan ændre valg på få dage</h3>
+            <p><strong>Eksempel:</strong> Kandidat brugte familie i opslag → "stikker helt af" med tusindvis af likes</p>
+        </div>
+        <div class="grid-2">
+            <div class="data-card">
+                <span class="stat-medium">155%</span>
+                <p>flere sidevisninger hos private medier omkring kommunalvalget</p>
+            </div>
+            <div class="data-card warning">
+                <h4>Personificering</h4>
+                <p>Vælgere følger <strong>Line Barfod</strong>, ikke SF's program</p>
+                <p>→ Accelererer dealignment</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 16 -->
+    <div class="slide">
+        <span class="theory-tag tag-michigan">Michigan-modellen</span>
+        <h2>The Funnel of Causality</h2>
+        <div class="funnel">
+            <div class="flayer f1">⬇️ LANGSIGTSFAKTORER<br>Socialisering, Socioøkonomisk Klasse, Demografi, Religion & Værdier</div>
+            <div class="flayer f2">⬇️ PARTIIDENTIFIKATION<br>"Jeg ER socialdemokrat"</div>
+            <div class="flayer f3">⬇️ KORTSIGTSFAKTORER<br>Kandidatevaluering, Issue-voting, Konjunktur, Kampagneeffekter</div>
+            <div class="flayer f4">⬇️ STEMMEAFGIVNING</div>
+        </div>
+        <div class="grid-2" style="margin-top: 1.5rem;">
+            <div class="data-card">
+                <h4>Klassisk (1960-2000)</h4>
+                <p>Langsigtsfaktorer stabile</p>
+                <p>Partiidentifikation stærk</p>
+                <p>Kortsigtsfaktorer: 2-3% forskydning</p>
+            </div>
+            <div class="data-card alert">
+                <h4>2025 Realitet</h4>
+                <p><strong>Dealignment:</strong> Partiidentifikation brudt sammen</p>
+                <p>Kortsigtsfaktorer dominerer totalt</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 17 -->
+    <div class="slide">
+        <h2>Borgmestereffekten (Omvendt)</h2>
+        <div class="data-card">
+            <h3>Second-Order Elections</h3>
+            <p>Kommunalvalg bruges til at <strong>"straffe" regeringen</strong></p>
+            <p>Det er en "midtvejs-meningsmåling" eller "protest-valg"</p>
+        </div>
+        <div class="grid-2">
+            <div class="data-card alert">
+                <h4>SVM-regeringen upopulær pga:</h4>
+                <ul>
+                    <li>Store Bededag afskaffet</li>
+                    <li>Inflation</li>
+                    <li>Sundhedskrise</li>
+                    <li>Klimapolitik</li>
+                </ul>
+            </div>
+            <div class="data-card alert">
+                <h4>Resultatet:</h4>
+                <p>S mistede borgmesterposter i Næstved, Køge, Gladsaxe, Fredericia</p>
+                <p><strong>Selvom mange S-borgmestre var populære lokalt!</strong></p>
+                <p>→ National valgvind overtrumfede lokal popularitet</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 18 -->
+    <div class="slide">
+        <h2>Folketingsvalg 2026</h2>
+        <div class="data-card" style="text-align: center;">
+            <h3>Senest 31. oktober 2026</h3>
+        </div>
+        <table>
+            <thead><tr><th>Parti</th><th>Aktuel måling</th><th>FV22 resultat</th><th>Ændring</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Socialdemokratiet</strong></td><td>20,6%</td><td>25,9%</td><td style="color: var(--parliament-red);">-5,3%</td></tr>
+                <tr><td><strong>SF</strong></td><td>12,6%</td><td>8,3%</td><td style="color: var(--data-teal);">+4,3%</td></tr>
+                <tr><td><strong>Liberal Alliance</strong></td><td>11,3%</td><td>7,9%</td><td style="color: var(--data-teal);">+3,4%</td></tr>
+                <tr><td><strong>Venstre</strong></td><td>10,4%</td><td>13,3%</td><td style="color: var(--parliament-red);">-2,9%</td></tr>
+                <tr><td><strong>Danmarksdemokraterne</strong></td><td>8,8%</td><td>8,1%</td><td style="color: var(--data-teal);">+0,7%</td></tr>
+            </tbody>
+        </table>
+        <p><strong>Konklusion:</strong> SVM-regeringen er i dyb krise. Alle tre regeringspartier blør.</p>
+    </div>
+
+    <!-- SLIDE 19 -->
+    <div class="slide">
+        <h2>FV26: Afgørende Temaer</h2>
+        <div class="grid-2">
+            <div class="data-card">
+                <h4>💰 Økonomi & Købekraft</h4>
+                <p>Inflationen har ramt hårdt</p>
+            </div>
+            <div class="data-card">
+                <h4>🏥 Sundhedsvæsen</h4>
+                <p>Ventetider og personalemangel</p>
+            </div>
+        </div>
+        <div class="grid-2">
+            <div class="data-card">
+                <h4>🌍 Klima</h4>
+                <p>Danmarks grønne ambitioner</p>
+            </div>
+            <div class="data-card">
+                <h4>🛂 Integration</h4>
+                <p>Flygtninge og udlændingepolitik</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 20 -->
+    <div class="slide">
+        <h2>Statsministereffekten</h2>
+        <div class="grid-2">
+            <div class="data-card alert">
+                <h4>Mette Frederiksen (S)</h4>
+                <p>Personlig popularitet faldet kraftigt</p>
+                <p>Risikerer at miste regeringsmagten</p>
+            </div>
+            <div class="data-card success">
+                <h4>Line Barfod (SF)</h4>
+                <p>Enormt momentum efter Kbh-sejr</p>
+                <p>Nationalt kendt ansigt</p>
+                <p><strong>Kan SF blive Danmarks største parti?</strong></p>
+            </div>
+        </div>
+        <div class="data-card warning">
+            <h4>Alex Vanopslagh (LA)</h4>
+            <p>Stigende popularitet</p>
+            <p>Liberalt budskab om lavere skatter resonerer</p>
+        </div>
+        <p style="margin-top: 1rem;"><strong>Politik er blevet personliggjort:</strong> Vi stemmer på ledere, ikke bare partier</p>
+    </div>
+
+    <!-- SLIDE 21 -->
+    <div class="slide">
+        <h2>Downs i Praksis: Geografisk Variation</h2>
+        <div class="grid-2">
+            <div class="data-card success">
+                <h3>København</h3>
+                <p><strong>Medianvælger flyttet til venstre</strong></p>
+                <p>Ung, højtuddannet lejer der går op i klima</p>
+                <p>→ "Midten" ligger i SF/RV's område</p>
+                <p><strong>SF vandt</strong> ved at ramme denne medianvælger perfekt</p>
+            </div>
+            <div class="data-card warning">
+                <h3>Næstved</h3>
+                <p><strong>Medianvælger i klassisk midte</strong></p>
+                <p>Ældre boligejer der går op i økonomi</p>
+                <p>→ "Midten" ligger i V/S's område</p>
+                <p><strong>Venstre vandt</strong> ved at ramme denne medianvælger</p>
+            </div>
+        </div>
+        <div class="data-card alert">
+            <h3>Hvorfor S tabte begge steder:</h3>
+            <p>Forsøgte at ramme en NATIONAL medianvælger der ikke eksisterer</p>
+            <p><strong>Kbh:</strong> Gik for langt til højre på udlændinge | <strong>Næstved:</strong> Forbindes med høje skatter</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 22 -->
+    <div class="slide">
+        <h2>Søren Pinds Kritik af Downs</h2>
+        <div class="quote-block">
+            Partierne er ikke længere bevægelser med rod i befolkningen - de er redskaber for personlige ambitioner
+            <cite>Søren Pind, Berlingske 26. oktober 2025</cite>
+        </div>
+        <div class="data-card alert">
+            <h3>Hvad gik galt?</h3>
+            <p><strong>Før:</strong> Partier havde distinkt identitet (V = bonden, S = arbejderen)</p>
+            <p><strong>Nu:</strong> Alle jager samme medianvælger = ingen identitet</p>
+            <p>→ Vælgerne "ved ikke hvor de har partierne"</p>
+            <p>→ Resultatet: <strong>Volatilitet og dealignment</strong></p>
+        </div>
+    </div>
+
+    <!-- SLIDE 23 -->
+    <div class="slide">
+        <h2>Case: Odense - Volatilitet i Praksis</h2>
+        <div class="data-card">
+            <h3>Anker Boye (S) - Borgmester i Odense</h3>
+            <div class="grid-2">
+                <div>
+                    <p><strong>2001:</strong></p>
+                    <span class="stat-medium">35.931</span>
+                    <p>personlige stemmer - næsten absolut flertal</p>
+                    <p>Højeste tal nogensinde</p>
+                </div>
+                <div>
+                    <p><strong>2002:</strong></p>
+                    <p style="font-size: 1.5rem; font-weight: 700; color: var(--parliament-red);">Byens mest upopulære mand</p>
+                    <p>Efter sparerunder og besparelser</p>
+                </div>
+            </div>
+        </div>
+        <div class="data-card warning">
+            <p><strong>2021:</strong> Peter Rahbæk Juel (S efterfølger) mistede <strong>halvdelen</strong> af sine personlige stemmer på bare 4 år</p>
+        </div>
+        <p style="margin-top: 1rem;"><strong>KONKLUSION:</strong> Selv i en traditionel S-højborg betyder partiidentifikation mindre. Kortsigtsfaktorer kan vende alt på hovedet.</p>
+    </div>
+
+    <!-- SLIDE 24 -->
+    <div class="slide">
+        <h2>Komplet Teoretisk Ramme</h2>
+        <table>
+            <thead><tr><th>Teori</th><th>Forklaring</th><th>2025-evidens</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><span class="theory-tag tag-michigan">Michigan</span></td>
+                    <td>Langsigte + kortsigte faktorer → stemme</td>
+                    <td><strong>Dealignment:</strong> 49% uafklarede. Kortsigtsfaktorer dominerer.</td>
+                </tr>
+                <tr>
+                    <td><span class="theory-tag tag-downs">Downs</span></td>
+                    <td>Partier søger medianvælger</td>
+                    <td>SF vandt Kbh, V vandt Næstved (geografisk variation)</td>
+                </tr>
+                <tr>
+                    <td><span class="theory-tag tag-cleavage">Cleavage</span></td>
+                    <td>By-land konflikt strukturerer politik</td>
+                    <td>Centrum (Kbh) vs. Periferi (Næstved)</td>
+                </tr>
+                <tr>
+                    <td><span class="theory-tag tag-cleavage">Inglehart</span></td>
+                    <td>Fra materielle → postmaterielle værdier</td>
+                    <td>Kbh: klima/identitet. Næstved: job/økonomi</td>
+                </tr>
+                <tr>
+                    <td><span class="theory-tag tag-media">Agenda-Setting</span></td>
+                    <td>Medier sætter dagsorden for emner</td>
+                    <td>Line Barfods TikTok → klima-fokus i Kbh</td>
+                </tr>
+                <tr>
+                    <td><span class="theory-tag tag-media">Second-Order</span></td>
+                    <td>Kommunalvalg som protest mod regering</td>
+                    <td>SVM-utilfredshed → S tabte lokalt</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- SLIDE 25 -->
+    <div class="slide">
+        <h2>Konklusion</h2>
+        <div class="data-card success">
+            <h3>Kommunalvalg 2025: Et Jordskred</h3>
+            <ul>
+                <li>SF's historiske sejr i København efter 100+ år</li>
+                <li>Liberal Alliance firdoblet (1,38% → 5,5%)</li>
+                <li>Socialdemokratiet katastrofalt tab (-5,2%)</li>
+            </ul>
+        </div>
+        <div class="data-card alert">
+            <h3>Dansk politik i transformation</h3>
+            <ul>
+                <li><strong>Polarisering:</strong> Midten taber til fløjene (SF + LA/DD)</li>
+                <li><strong>Volatilitet:</strong> Partier kan stige/falde dramatisk</li>
+                <li><strong>Dealignment:</strong> 49% uafklarede, hver 7. beslutter i boksen</li>
+                <li><strong>By-land:</strong> Den dybeste konfliktlinje i Danmark</li>
+                <li><strong>Medier:</strong> TikTok & Instagram afgør valg</li>
+            </ul>
+        </div>
+        <div class="data-card" style="text-align: center; margin-top: 1.5rem;">
+            <h3>Husk at stemme ved folketingsvalget</h3>
+            <span class="stat-large">31. okt. 2026</span>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Senest</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    const counter = document.getElementById('current');
+    
+    function show(n) {
+        if (n >= total) current = 0;
+        else if (n < 0) current = total - 1;
+        else current = n;
+        slides.forEach((s, i) => s.classList.toggle('active', i === current));
+        counter.textContent = current + 1;
+    }
+    
+    function next() { show(current + 1); }
+    function prev() { show(current - 1); }
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    });
+    
+    show(0);
+</script>
 </body>
 </html>
